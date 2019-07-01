@@ -4,12 +4,15 @@ import com.cvurl.usage.example.cvurlusage.model.*;
 import coresearch.cvurl.io.exception.UnexpectedResponseException;
 import coresearch.cvurl.io.model.Response;
 import coresearch.cvurl.io.request.CVurl;
+import coresearch.cvurl.io.util.HttpHeader;
 import coresearch.cvurl.io.util.HttpStatus;
+import coresearch.cvurl.io.util.MIMEType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -60,6 +63,7 @@ public class ExampleController {
     public UserCreatedResponseDto createUser(@RequestBody UserDto userDto) {
         return cVurl.POST(HOST + USERS)
                 .body(userDto)
+                .header(HttpHeader.CONTENT_TYPE, MIMEType.APPLICATION_JSON)
                 .build()
                 .asObject(UserCreatedResponseDto.class, HttpStatus.CREATED);
     }
@@ -68,6 +72,7 @@ public class ExampleController {
     public UserUpdatedResponseDto updateUser(@RequestBody UserDto userDto, @PathVariable String userId) {
         return cVurl.PUT(HOST + USERS + "/" + userId)
                 .body(userDto)
+                .headers(Map.of(HttpHeader.CONTENT_TYPE, MIMEType.APPLICATION_JSON))
                 .build()
                 .asObject(UserUpdatedResponseDto.class, HttpStatus.OK);
     }
