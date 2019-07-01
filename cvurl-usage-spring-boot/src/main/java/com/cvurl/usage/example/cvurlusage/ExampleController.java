@@ -7,8 +7,10 @@ import coresearch.cvurl.io.request.CVurl;
 import coresearch.cvurl.io.util.HttpHeader;
 import coresearch.cvurl.io.util.HttpStatus;
 import coresearch.cvurl.io.util.MIMEType;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,6 +60,35 @@ public class ExampleController {
                 .build()
                 .asObject(GetUserDto.class, HttpStatus.OK);
     }
+
+    @GetMapping("/user-as-string/{userId}")
+    public ResponseEntity<String> singleUserAsString(@PathVariable String userId) {
+        Response<String> response = cVurl.GET(HOST + USERS + "/" + userId)
+                .build()
+                .asString()
+                .orElseThrow(() -> new RuntimeException("Some error happened during request execution"));
+
+        if (response.status() == 200) {
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response.getBody());
+        } else {
+            return ResponseEntity.status(response.status()).body(response.getBody());
+        }
+    }
+
+    @GetMapping("/user-as-json/{userId}")
+    public ResponseEntity<String> singleUserAsJson(@PathVariable String userId) {
+        Response<JSONObject> response = cVurl.GET(HOST + USERS + "/" + userId)
+                .build()
+                .map(JSONObject::new)
+                .orElseThrow(() -> new RuntimeException("Some error happened during request execution"));
+
+        if (response.status() == 200) {
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response.getBody().toString());
+        } else {
+            return ResponseEntity.status(response.status()).body(response.getBody().toString());
+        }
+    }
+
 
     @PostMapping("/users")
     public UserCreatedResponseDto createUser(@RequestBody UserDto userDto) {
