@@ -152,7 +152,7 @@ public class ExampleController {
      * and body from given response.
      */
     @Delete("/users/{userId}")
-    public HttpResponse deleteUser(@Body UserDto userDto, @PathVariable String userId) {
+    public HttpResponse deleteUser(@PathVariable String userId) {
         Response<String> response = cVurl.DELETE(HOST + USERS + "/" + userId)
                 .build()
                 .asString()
