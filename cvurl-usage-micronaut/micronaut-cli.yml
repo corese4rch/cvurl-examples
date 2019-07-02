@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: cvurl.usage.micronaut.example
+---
+testFramework: junit
+sourceLanguage: java
