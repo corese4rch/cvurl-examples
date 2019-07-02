@@ -10,6 +10,10 @@
         <jdk.version>11</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>cvurl.usage.micronaut.Application</exec.mainClass>
+        <logback-classic.version>1.2.3</logback-classic.version>
+        <cvurl-io.version>0.9</cvurl-io.version>
+        <lombok.version>1.18.8</lombok.version>
+        <jackson.version>2.9.9</jackson.version>
     </properties>
     <repositories>
         <repository>
@@ -62,29 +66,19 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>${logback-classic.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>net.corevalue</groupId>
             <artifactId>cvurl-io</artifactId>
-            <version>0.9</version>
+            <version>${cvurl-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.9.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.9</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -172,7 +166,7 @@
                             <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok</artifactId>
-                                <version>1.18.8</version>
+                                <version>${lombok.version}</version>
                             </path>
                             <path>
                                 <groupId>io.micronaut</groupId>
