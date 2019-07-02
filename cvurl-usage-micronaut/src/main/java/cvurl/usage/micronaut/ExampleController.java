@@ -12,8 +12,6 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Error;
 import io.micronaut.http.annotation.*;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Optional;
@@ -24,8 +22,6 @@ public class ExampleController {
     private static final String HOST = "https://reqres.in/api/";
     private static final String USERS = "users";
     private static final int NON_EXISTENT_USER_ID = 23;
-
-    private static final Logger logger = LoggerFactory.getLogger(ExampleController.class);
 
     private final CVurl cVurl;
 
