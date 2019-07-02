@@ -14,6 +14,11 @@
         <cvurl-io.version>0.9</cvurl-io.version>
         <lombok.version>1.18.8</lombok.version>
         <jackson.version>2.9.9</jackson.version>
+        <maven-compiler.version>3.7.0</maven-compiler.version>
+        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+        <maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
+        <json.version>20180813</json.version>
     </properties>
     <repositories>
         <repository>
@@ -83,7 +88,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180813</version>
+            <version>${json.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -106,7 +111,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${maven-shade-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -129,7 +134,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>${exec-maven-plugin.version}</version>
                 <configuration>
                     <executable>java</executable>
                     <arguments>
@@ -146,7 +151,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -154,7 +159,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
+                    <version>${maven-compiler.version}</version>
                     <configuration>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
