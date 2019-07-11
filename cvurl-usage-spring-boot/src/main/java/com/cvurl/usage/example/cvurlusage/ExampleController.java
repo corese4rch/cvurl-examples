@@ -34,9 +34,11 @@ public class ExampleController {
 
     @ExceptionHandler(UnexpectedResponseException.class)
     public ResponseEntity handleException(UnexpectedResponseException exception) {
+        var response = exception.getResponse();
+
         return ResponseEntity
-                .status(400)
-                .body(exception.getMessage());
+                .status(response.status())
+                .body(response.getBody());
     }
 
     /**

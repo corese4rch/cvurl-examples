@@ -12,6 +12,11 @@ public class UnexpectedResponseExceptionMapper implements ExceptionMapper<Unexpe
 
     @Override
     public Response toResponse(UnexpectedResponseException e) {
-        return Response.status(HttpStatus.BAD_REQUEST).entity(e.getMessage()).build();
+        var response = e.getResponse();
+
+        return Response
+                .status(response.status())
+                .entity(response.getBody())
+                .build();
     }
 }
