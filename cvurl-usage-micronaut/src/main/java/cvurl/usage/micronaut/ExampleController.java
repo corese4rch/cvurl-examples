@@ -31,8 +31,10 @@ public class ExampleController {
 
     @Error(UnexpectedResponseException.class)
     public HttpResponse handleException(UnexpectedResponseException exception) {
+        var response = exception.getResponse();
         return HttpResponse
-                .badRequest(exception.getMessage());
+                .status(io.micronaut.http.HttpStatus.valueOf(response.status()))
+                .body(response.getBody());
     }
 
     /**
@@ -41,7 +43,7 @@ public class ExampleController {
      */
     @Get("/users")
     public GetUsersDto listUsers(@QueryValue Optional<Integer> page) {
-            return cVurl.GET(HOST + USERS)
+        return cVurl.GET(HOST + USERS)
                 .queryParam("page", page.orElse(1).toString())
                 .build()
                 .asObject(GetUsersDto.class, HttpStatus.OK);

@@ -1,6 +1,7 @@
 package cvurl.usage.plain.java;
 
 import coresearch.cvurl.io.exception.UnexpectedResponseException;
+import coresearch.cvurl.io.model.Response;
 import cvurl.usage.plain.java.model.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,8 @@ public class Main {
         try {
             logResult(singleUserNotFound());
         } catch (UnexpectedResponseException e) {
-            LOGGER.error(e.getMessage());
+            var response = e.getResponse();
+            LOGGER.error("Unexpected response with status {}, body {}", response.status(), response.getBody());
         }
 
         logResult(singleUserAsString(1));
