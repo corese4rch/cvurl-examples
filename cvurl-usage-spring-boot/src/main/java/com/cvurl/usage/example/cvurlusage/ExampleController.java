@@ -1,12 +1,12 @@
 package com.cvurl.usage.example.cvurlusage;
 
 import com.cvurl.usage.example.cvurlusage.model.*;
+import coresearch.cvurl.io.constant.HttpHeader;
+import coresearch.cvurl.io.constant.HttpStatus;
+import coresearch.cvurl.io.constant.MIMEType;
 import coresearch.cvurl.io.exception.UnexpectedResponseException;
 import coresearch.cvurl.io.model.Response;
 import coresearch.cvurl.io.request.CVurl;
-import coresearch.cvurl.io.util.HttpHeader;
-import coresearch.cvurl.io.util.HttpStatus;
-import coresearch.cvurl.io.util.MIMEType;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
