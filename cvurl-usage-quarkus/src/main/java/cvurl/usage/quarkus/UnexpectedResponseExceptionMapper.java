@@ -1,7 +1,7 @@
 package cvurl.usage.quarkus;
 
+import coresearch.cvurl.io.constant.HttpStatus;
 import coresearch.cvurl.io.exception.UnexpectedResponseException;
-import coresearch.cvurl.io.util.HttpStatus;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
