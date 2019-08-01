@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDto {
     private String name;
-    private String job;
+    private String email;
 }
