@@ -1,19 +1,20 @@
 package cvurl.usage.plain.java.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GetUsersDto {
     private Integer page;
     private Integer total;
     private List<User> data;
-
-    @JsonAlias("total_pages")
     private Integer totalPages;
-
-    @JsonAlias("per_page")
     private Integer perPage;
 }
