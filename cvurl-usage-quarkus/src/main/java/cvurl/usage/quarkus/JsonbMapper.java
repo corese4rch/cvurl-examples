@@ -6,7 +6,7 @@ import coresearch.cvurl.io.mapper.GenericMapper;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbException;
 
-public class JsonbMapper implements GenericMapper {
+public class JsonbMapper extends GenericMapper {
 
     private Jsonb jsonb;
 
@@ -19,7 +19,7 @@ public class JsonbMapper implements GenericMapper {
         try {
             return jsonb.fromJson(value, type);
         } catch (JsonbException e) {
-            throw new MappingException(e.getMessage());
+            throw new MappingException(e.getMessage(), e);
         }
     }
 
@@ -28,7 +28,7 @@ public class JsonbMapper implements GenericMapper {
         try {
             return jsonb.toJson(obj);
         } catch (JsonbException e) {
-            throw new MappingException(e.getMessage());
+            throw new MappingException(e.getMessage(), e);
         }
     }
 }
