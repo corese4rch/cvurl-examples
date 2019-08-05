@@ -171,7 +171,6 @@ public class ExampleResource {
     public User createUserFromFormUrlencoded(Map<String, String> userMap) {
         return cVurl.post(HOST + USERS)
                 .formData(userMap)
-                .header(HttpHeader.CONTENT_TYPE, MIMEType.APPLICATION_FORM)
                 .asObject(User.class, HttpStatus.CREATED)
                 .orElseThrow(() -> new RuntimeException("User can't be created"));
     }
