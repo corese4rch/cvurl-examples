@@ -16,6 +16,9 @@
 
     <properties>
         <java.version>11</java.version>
+        <cvurl-io.version>1.0</cvurl-io.version>
+        <lombok.version>1.18.8</lombok.version>
+        <json.version>20180813</json.version>
     </properties>
 
     <dependencies>
@@ -26,18 +29,18 @@
         <dependency>
             <groupId>com.github.corese4rch</groupId>
             <artifactId>cvurl-io</artifactId>
-            <version>0.9</version>
+            <version>${cvurl-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180813</version>
+            <version>${json.version}</version>
         </dependency>
 
 
