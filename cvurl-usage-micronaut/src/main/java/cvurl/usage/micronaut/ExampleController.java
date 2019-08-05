@@ -163,7 +163,6 @@ public class ExampleController {
     public User createUserFromFormUrlencoded(@Body Map<String, String> userMap) {
         return cVurl.post(HOST + USERS)
                 .formData(userMap)
-                .header(HttpHeader.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
                 .asObject(User.class, HttpStatus.CREATED)
                 .orElseThrow(() -> new RuntimeException("User can't be created"));
     }
