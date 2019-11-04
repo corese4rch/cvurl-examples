@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.stream.Collectors.toList;
@@ -54,6 +51,11 @@ public class ExampleController {
                 .build();
     }
 
+    @GetMapping("/users/list")
+    public List<User> getUsersAsList() {
+        return new ArrayList<>(this.users.values());
+    }
+
     @GetMapping("/users/{id}")
     public ResponseEntity getUser(@PathVariable Integer id) {
         User user = users.get(id);
@@ -78,7 +80,6 @@ public class ExampleController {
         int id = usersCount.incrementAndGet();
         User user = new User(id, createUserMap.get("email"), createUserMap.get("name"));
         this.users.put(id, user);
-
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }

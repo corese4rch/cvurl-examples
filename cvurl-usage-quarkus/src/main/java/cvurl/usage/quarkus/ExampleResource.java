@@ -4,21 +4,21 @@ import coresearch.cvurl.io.constant.HttpHeader;
 import coresearch.cvurl.io.constant.HttpStatus;
 import coresearch.cvurl.io.constant.MIMEType;
 import coresearch.cvurl.io.exception.ResponseMappingException;
+import coresearch.cvurl.io.mapper.BodyType;
 import coresearch.cvurl.io.model.Response;
 import coresearch.cvurl.io.multipart.MultipartBody;
 import coresearch.cvurl.io.multipart.Part;
 import coresearch.cvurl.io.request.CVurl;
+import coresearch.cvurl.io.util.Url;
 import cvurl.usage.quarkus.model.GetUsersDto;
 import cvurl.usage.quarkus.model.User;
 import cvurl.usage.quarkus.model.UserDto;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartInput;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericType;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.http.HttpResponse;
@@ -262,6 +262,21 @@ public class ExampleResource {
 
         Files.delete(path);
         return responseEntity;
+    }
+
+    /**
+     * Makes GET request to /users/list endpoint that return json array of objects.
+     * Parses it to List<User> by using BodyType.
+     *
+     * @return List of users
+     */
+    @GET
+    @Path("/users/list")
+    @Produces(APPLICATION_JSON)
+    public List<User> getUsersAsList() {
+        return cVurl.get(Url.of(HOST).path(USERS).path("list").create())
+                .asObject(new BodyType<>() {
+                });
     }
 
 
