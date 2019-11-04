@@ -40,6 +40,7 @@ public class Main {
         logResult(createUserFromFormUrlencoded(Map.of("name", userDto.getName(), "email", userDto.getEmail())));
         logResult(uploadPhoto(Path.of(PHOTO_PATH), PHOTO_TITLE));
         logResult(getPhoto(PHOTO_TITLE, GET_PHOTO_PATH));
+        logResult(getUsersAsList());
     }
 
     private static void logResult(Object result) {

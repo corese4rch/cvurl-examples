@@ -3,10 +3,12 @@ package cvurl.usage.micronaut;
 import coresearch.cvurl.io.constant.HttpHeader;
 import coresearch.cvurl.io.constant.HttpStatus;
 import coresearch.cvurl.io.exception.ResponseMappingException;
+import coresearch.cvurl.io.mapper.BodyType;
 import coresearch.cvurl.io.model.Response;
 import coresearch.cvurl.io.multipart.MultipartBody;
 import coresearch.cvurl.io.multipart.Part;
 import coresearch.cvurl.io.request.CVurl;
+import coresearch.cvurl.io.util.Url;
 import cvurl.usage.micronaut.model.GetUsersDto;
 import cvurl.usage.micronaut.model.User;
 import cvurl.usage.micronaut.model.UserDto;
@@ -21,6 +23,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -243,4 +246,17 @@ public class ExampleController {
         Files.delete(path);
         return httpResponse;
     }
+
+    /**
+     * Makes GET request to /users/list endpoint that return json array of objects.
+     * Parses it to List<User> by using BodyType.
+     *
+     * @return List of users
+     */
+    @Get("/users/list")
+    public List<User> getUsersAsList() {
+        return cVurl.get(Url.of(HOST).path(USERS).path("list").create())
+                .asObject(new BodyType<>() {});
+    }
+
 }

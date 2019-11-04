@@ -11,7 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>cvurl.usage.micronaut.Application</exec.mainClass>
         <logback-classic.version>1.2.3</logback-classic.version>
-        <cvurl-io.version>1.0</cvurl-io.version>
+        <cvurl-io.version>1.2</cvurl-io.version>
         <lombok.version>1.18.8</lombok.version>
         <jackson.version>2.9.9</jackson.version>
         <maven-compiler.version>3.7.0</maven-compiler.version>

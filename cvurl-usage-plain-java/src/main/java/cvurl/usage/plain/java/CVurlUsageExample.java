@@ -4,24 +4,25 @@ import coresearch.cvurl.io.constant.HttpHeader;
 import coresearch.cvurl.io.constant.HttpStatus;
 import coresearch.cvurl.io.constant.MIMEType;
 import coresearch.cvurl.io.exception.ResponseMappingException;
+import coresearch.cvurl.io.mapper.BodyType;
 import coresearch.cvurl.io.model.Response;
 import coresearch.cvurl.io.multipart.MultipartBody;
 import coresearch.cvurl.io.multipart.Part;
 import coresearch.cvurl.io.request.CVurl;
+import coresearch.cvurl.io.util.Url;
 import cvurl.usage.plain.java.model.GetUsersDto;
 import cvurl.usage.plain.java.model.User;
 import cvurl.usage.plain.java.model.UserDto;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 public class CVurlUsageExample {
 
@@ -30,7 +31,22 @@ public class CVurlUsageExample {
     private static final String PHOTOS = "photos/";
     private static final int NON_EXISTENT_USER_ID = 23;
 
-    private static final CVurl cVurl = new CVurl();
+    private static final CVurl cVurl = createCVurl();
+
+    private static CVurl createCVurl() {
+        return new CVurl();
+
+        /*
+        other ways you can create CVurl:
+        new CVurl(Configuration.builder(httpClient)
+                .genericMapper(genericMapper)
+                .build());
+        new CVurl(Configuration.builder()
+                .executor(Executors.newFixedThreadPool(3))
+                .requestTimeout(Duration.ofSeconds(5))
+                .build());
+        */
+    }
 
     /**
      * Make GET request to /users to get list of users with query param page (result is paginated) equals to passed parameter
@@ -181,6 +197,19 @@ public class CVurlUsageExample {
 
         return response.status() == HttpStatus.OK;
     }
+
+    /**
+     * Makes GET request to /users/list endpoint that return json array of objects.
+     * Parses it to List<User> by using BodyType.
+     *
+     * @return List of users
+     */
+    public static List<User> getUsersAsList() {
+        return cVurl.get(Url.of(HOST).path(USERS).path("list").create())
+                .asObject(new BodyType<>() {
+                });
+    }
+
 
     private static <T> T getBody(Response<T> response) {
         if (response.status() == HttpStatus.OK) {

@@ -1,6 +1,7 @@
 package cvurl.usage.quarkus;
 
 import coresearch.cvurl.io.exception.MappingException;
+import coresearch.cvurl.io.mapper.BodyType;
 import coresearch.cvurl.io.mapper.GenericMapper;
 
 import javax.json.bind.Jsonb;
@@ -30,5 +31,10 @@ public class JsonbMapper extends GenericMapper {
         } catch (JsonbException e) {
             throw new MappingException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public <T> T readValue(String str, BodyType<T> bodyType) {
+        return jsonb.fromJson(str, bodyType.getType());
     }
 }

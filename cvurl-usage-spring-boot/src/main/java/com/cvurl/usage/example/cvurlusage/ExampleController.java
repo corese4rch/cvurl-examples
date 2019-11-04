@@ -7,10 +7,12 @@ import coresearch.cvurl.io.constant.HttpHeader;
 import coresearch.cvurl.io.constant.HttpStatus;
 import coresearch.cvurl.io.constant.MIMEType;
 import coresearch.cvurl.io.exception.ResponseMappingException;
+import coresearch.cvurl.io.mapper.BodyType;
 import coresearch.cvurl.io.model.Response;
 import coresearch.cvurl.io.multipart.MultipartBody;
 import coresearch.cvurl.io.multipart.Part;
 import coresearch.cvurl.io.request.CVurl;
+import coresearch.cvurl.io.util.Url;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -24,6 +26,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -241,4 +244,19 @@ public class ExampleController {
         Files.delete(path);
         return responseEntity;
     }
+
+    /**
+     * Makes GET request to /users/list endpoint that return json array of objects.
+     * Parses it to List<User> by using BodyType.
+     *
+     * @return List of users
+     */
+    @GetMapping("/users/list")
+    public List<User> getUsersAsList() {
+        return cVurl.get(Url.of(HOST).path(USERS).path("list").create())
+                .asObject(new BodyType<>() {
+                });
+    }
+
+
 }

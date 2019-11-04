@@ -10,7 +10,7 @@
 
     <properties>
         <jdk.version>11</jdk.version>
-        <cvurl-io.version>1.0</cvurl-io.version>
+        <cvurl-io.version>1.2</cvurl-io.version>
         <lombok.version>1.18.8</lombok.version>
         <json.version>20180813</json.version>
         <jackson.version>2.10.0.pr1</jackson.version>
